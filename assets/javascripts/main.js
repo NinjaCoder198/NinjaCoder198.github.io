@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded",function(){
 	window.addEventListener('scroll', function(){
 		for (let i = 0; i < arrayAdressTemp.length; i++) {
 
-			let totalOffset = document.body.scrollTop + arrayAdressTemp[i].getBoundingClientRect().top + 200;
+			let totalOffset = document.body.scrollTop + arrayAdressTemp[i].getBoundingClientRect().top - 200;
 			let addressScroll = "add";
 			if (window.pageYOffset > totalOffset) {
 				if (addressScroll == "add") {
