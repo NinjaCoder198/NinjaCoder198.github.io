@@ -1420,11 +1420,11 @@ a, a:hover {
           transform: translateY(0);
 }
 .circle-icon.add_animation{
-  -webkit-animation: animation_3 1s ease forwards;
-     -moz-animation: animation_3 1s ease forwards;
-      -ms-animation: animation_3 1s ease forwards;
-       -o-animation: animation_3 1s ease forwards;
-          animation: animation_3 1s ease forwards;
+  -webkit-animation: animation_4 1s ease forwards;
+     -moz-animation: animation_4 1s ease forwards;
+      -ms-animation: animation_4 1s ease forwards;
+       -o-animation: animation_4 1s ease forwards;
+          animation: animation_4 1s ease forwards;
 }
 
 

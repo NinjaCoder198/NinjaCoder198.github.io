@@ -46,9 +46,9 @@ document.addEventListener("DOMContentLoaded",function(){
     	}
 	}
 
-	var slideInterval = setInterval(nextSlider_fun, 4000);
+	var slideInterval = setInterval(nextSlider_fun, 7000);
 	function playSlideshow(){
-		slideInterval = setInterval(nextSlider_fun, 4000);
+		slideInterval = setInterval(nextSlider_fun, 7000);
 	}
 
 	function pauseSlideshow(){
