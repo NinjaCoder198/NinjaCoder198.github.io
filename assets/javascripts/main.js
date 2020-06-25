@@ -83,19 +83,33 @@ document.addEventListener("DOMContentLoaded",function(){
 
 	// end slider
 
+	var x = screen.width;
 	// start content-mid	
-	const textCircle = document.querySelectorAll(".text-circle ul li");
-	var countCircle = 0;
-	textCircle.forEach((item) =>{
-		let setHTML = item.textContent;
-		if (setHTML == "") {
-			countCircle += 4;
-			item.style.transform = "rotate("+ countCircle + "deg)";
-		}else{
-			countCircle += 6;
-			item.style.transform = "rotate("+ countCircle + "deg)";
+	const TextCircle = document.querySelectorAll(".text-circle > div");
+	if (x >= 1250) {
+		for (let i = 0; i < TextCircle.length; i++) {
+			new CircleType(TextCircle[i])
+			.radius(115); 
 		}
-	});    
+
+	}else if(x < 1250 && x >= 850){
+		for (let i = 0; i < TextCircle.length; i++) {
+			new CircleType(TextCircle[i])
+			  .radius(90); 
+		}
+
+	}else if(x < 850 && x >= 660){
+		for (let i = 0; i < TextCircle.length; i++) {
+			new CircleType(TextCircle[i])
+			  .radius(55); 
+		}
+
+	}else if(x < 660){
+		for (let i = 0; i < TextCircle.length; i++) {
+			new CircleType(TextCircle[i])
+			  .radius(40); 
+		}
+	}
 
     // end contetn-mid
 
@@ -146,6 +160,5 @@ document.addEventListener("DOMContentLoaded",function(){
 		}
 	})
 	// end animation
-
 
 },false);
