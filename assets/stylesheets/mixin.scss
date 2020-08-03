@@ -1,0 +1,123 @@
+
+@mixin transform($property) {
+	-webkit-transform: $property;
+	   -moz-transform: $property;
+	    -ms-transform: $property;
+	     -o-transform: $property;
+	        transform: $property;
+}
+/* @include transform(rotate(30deg)); */
+
+@mixin transformOrigin($valX, $valY) {
+	-webkit-transform-origin: $valX $valY;
+	   -moz-transform-origin: $valX $valY;
+	    -ms-transform-origin: $valX $valY;
+	     -o-transform-origin: $valX $valY;
+	        transform-origin: $valX $valY;
+}
+
+@mixin centerAbsolute($pos) {
+	position: absolute;
+	@if $pos == "both" {
+		top: 50%;
+		left: 50%;
+		-webkit-transform: translate(-50%, -50%);
+		   -moz-transform: translate(-50%, -50%);
+		    -ms-transform: translate(-50%, -50%);
+		     -o-transform: translate(-50%, -50%);
+		        transform: translate(-50%, -50%);
+	} @else if $pos == "left" {
+		left: 50%;
+		-webkit-transform: translateX(-50%);
+		   -moz-transform: translateX(-50%);
+		    -ms-transform: translateX(-50%);
+		     -o-transform: translateX(-50%);
+		        transform: translateX(-50%);
+	} @else if $pos == "top" {
+		top: 50%;
+		-webkit-transform: translateY(-50%);
+		   -moz-transform: translateY(-50%);
+		    -ms-transform: translateY(-50%);
+		     -o-transform: translateY(-50%);
+		        transform: translateY(-50%);
+	}
+}
+/* @include centerAbsolute(top); */
+
+@mixin flexbox {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+/* @include flexbox; */
+
+@mixin justifyContent($value){
+	-webkit-justify-content: $value;
+	   -moz-justify-content: $value;
+	    -ms-justify-content: $value;
+	     -o-justify-content: $value;
+	        justify-content: $value;
+}
+/* @include justifyContent(space-between); */
+
+@mixin alignItems($value){
+	-webkit-align-items: $value;
+	   -moz-align-items: $value;
+	    -ms-align-items: $value;
+	     -o-align-items: $value;
+	        align-items: $value;
+}
+
+@mixin centerFlex {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-justify-content: center;
+	   -moz-justify-content: center;
+	    -ms-justify-content: center;
+	     -o-justify-content: center;
+	        justify-content: center;
+    -webkit-align-items: center;
+	   -moz-align-items: center;
+	    -ms-align-items: center;
+	     -o-align-items: center;
+	        align-items: center;
+}
+/* @include centerFlex; */
+
+@mixin transition($name, $settime, $ani){
+	-webkit-transition: $name $settime $ani;
+	   -moz-transition: $name $settime $ani;
+	    -ms-transition: $name $settime $ani;
+	     -o-transition: $name $settime $ani;
+	        transition: $name $settime $ani;
+}
+
+@mixin backgroundWhiteBlack{
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed));
+	background: -webkit-linear-gradient(left, #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+	background:     -ms-linear-gradient(left, #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+	background:      -o-linear-gradient(left, #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+	background:         linear-gradient(left, #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+}
+
+
+@mixin boxShadow($vala, $valb, $valc, $vald, $colors) {
+	-webkit-transform-origin: $vala $valb $valc $vald $colors;
+	   -moz-transform-origin: $vala $valb $valc $vald $colors;
+	    -ms-transform-origin: $vala $valb $valc $vald $colors;
+	     -o-transform-origin: $vala $valb $valc $vald $colors;
+	        transform-origin: $vala $valb $valc $vald $colors;
+}
+
+@mixin boxShadowInset($vala, $valb, $valc, $vald, $colors) {
+	-webkit-transform-origin: $vala $valb $valc $vald $colors inset;
+	   -moz-transform-origin: $vala $valb $valc $vald $colors inset;
+	    -ms-transform-origin: $vala $valb $valc $vald $colors inset;
+	     -o-transform-origin: $vala $valb $valc $vald $colors inset;
+	        transform-origin: $vala $valb $valc $vald $colors inset;
+}

@@ -1,164 +1,115 @@
-document.addEventListener("DOMContentLoaded",function(){
+$(document).ready(function() {
+
+	var tl = new TimelineLite();
+
+	var swiper = new Swiper('.swiper-container_home', {
+		slidesPerView: 1,
+		loop: true,
+		allowTouchMove: true,
+		slidesPerView: 'auto',
+		grabCursor: true,
+		preventClicks: true,
+		keyboardControl: true,
+		speed: 1000,
+		pagination: {
+			el: '.swiper-pagination',
+			clickable: true,
+			renderBullet: function (index, className) {
+				return '<span class="' + className + ' cursor__link"></span>';
+			},
+		},
+		
+	});
 
 
-	// start slider
-	var count = 0;
 
-    const nextSlider = document.querySelector(".next_slider");
-    const prevSlider = document.querySelector(".prev_slider");
-    const Slider = document.querySelector(".slider");
-    const bannerSlider = document.querySelectorAll(".banner-slider ul li");
-    const navDostButton = document.querySelectorAll(".nav-dost-button ul li");
 
-    function removeSlider() {
-    	for (let i = 0; i < bannerSlider.length; i++) {
-    		bannerSlider[i].classList.remove("active_banner-slider");
-    		navDostButton[i].classList.remove("active_nav-dost-button");
-    	}
-	} 
 
-	function nextSlider_fun(){
-		if (count >= (bannerSlider.length - 1)) {
-			removeSlider();
-			bannerSlider[0].classList.add("active_banner-slider");
-			navDostButton[0].classList.add("active_nav-dost-button");
-			count = 0;
-		}    		
-    	else if (count < (bannerSlider.length - 1)){
-    		removeSlider();
-			bannerSlider[count+1].classList.add("active_banner-slider");
-			navDostButton[count+1].classList.add("active_nav-dost-button");
-			count++;
-    	}
-	}
-	function prevSlider_fun(){
-		if (count <= 0) {
-			removeSlider();
-			bannerSlider[bannerSlider.length - 1].classList.add("active_banner-slider");
-			navDostButton[bannerSlider.length - 1].classList.add("active_nav-dost-button");
-			count = bannerSlider.length - 1;
-		}    		
-    	else if (count > 0){
-    		removeSlider();
-			bannerSlider[count-1].classList.add("active_banner-slider");
-			navDostButton[count-1].classList.add("active_nav-dost-button");
-			count--;
-    	}
-	}
+	var galleryThumbs = new Swiper('.gallery-thumbs', {
+		// spaceBetween: 10,
+		slidesPerView: 5,
+		loop: true,
+		freeMode: true,
+		loopedSlides: 5, //looped slides should be the same
+		watchSlidesVisibility: true,
+		watchSlidesProgress: true,
+	});
+	var galleryTop = new Swiper('.gallery-top', {
+		// spaceBetween: 10,
+		loopedSlides: 5, //looped slides should be the same
+		loop: true,
+		navigation: {
+	      	prevEl: '.prev_slide',
+	      	nextEl: '.next_slide',
+		},
+		thumbs: {
+			swiper: galleryThumbs,
+		},
+	});
 
-	var slideInterval = setInterval(nextSlider_fun, 7000);
-	function playSlideshow(){
-		slideInterval = setInterval(nextSlider_fun, 7000);
-	}
 
-	function pauseSlideshow(){
-		clearInterval(slideInterval);
-	}
 
-	Slider.onmousemove = () =>{
-		pauseSlideshow();
-	}
-	Slider.onmouseout = () =>{
-		playSlideshow();
-	}
-    nextSlider.onclick = () => {
-		nextSlider_fun();
+
+
+
+
+
+	$('html').on('DOMMouseScroll mousewheel', function (e) {
+		if(e.originalEvent.detail > 0 || e.originalEvent.wheelDelta < 0) { //alternative options for wheelData: wheelDeltaX & wheelDeltaY
+		    //scroll down
+		    $( ".menu_home_header" ).addClass( "hidden_header" );
+		} else {
+		    //scroll up
+		    $( ".menu_home_header" ).removeClass( "hidden_header" );
+		}
+	});
+
+
+	$('.button_menu').click(function(event) {
+		$('header').toggleClass('show_menu');
+	});
+
+	$('.button_show_search_input').click(function(event) {
+		var tl = new TimelineLite();
+		tl.to('.content_search_input', 0.7 ,{scaleX: 1});
+		tl.to('.content_search_input > article', 0.5 ,{scaleX: 0});
+		tl.to('.button_show_search_input', 0 ,{display: "none"});
+		
+	});
+
+	$('.remove_label_input_search').click(function(event) {
+		var tl = new TimelineLite();
+		tl.to('.content_search_input > article', 0.7 ,{scaleX: 1});
+		tl.to('.content_search_input', 0.5 ,{scaleX: 0});
+		tl.to('.button_show_search_input', 0 ,{display: "block"});
+		
+	});
+
+
+	$('.cart_product > section').click(function(event) {
+		var tl = new TimelineLite();
+		tl.to('.layer_product', 0, {opacity: 1, visibility: "visible"});
+		tl.to('.layer_product form', 0.7, {scaleY: 1});
+		tl.to('.layer_product form > section', 0.7, {scaleY: 0});
+	});
+
+	function closeLayerProduct () {
+		var tl = new TimelineLite();
+		tl.to('.layer_product form > section', 0.7, {scaleY: 1});
+		tl.to('.layer_product form', 0.7, {scaleY: 0});
+		tl.to('.layer_product', 0, {opacity: 0, visibility: "hidden"});
 	};
-    prevSlider.onclick = () => {
-		prevSlider_fun();
-	};
+
+	$('.layer_background_product').click(function(event) {
+		closeLayerProduct();
+	});
+
+	$('.close_layer_product').click(function(event) {
+		closeLayerProduct();
+	});
+	
 
 
-	// Nav dost button click
-	for (let i = 0; i < navDostButton.length; i++) {
-		navDostButton[i].onclick = () =>{
-			if (i !== count) {
-				removeSlider();
-				bannerSlider[i].classList.add("active_banner-slider");
-				navDostButton[i].classList.add("active_nav-dost-button");
-				count = i;
-			}			
-		}
-	}
-
-	// end slider
-
-	var x = screen.width;
-	// start content-mid	
-	const TextCircle = document.querySelectorAll(".text-circle > div");
-	if (x >= 1250) {
-		for (let i = 0; i < TextCircle.length; i++) {
-			new CircleType(TextCircle[i])
-			.radius(115); 
-		}
-
-	}else if(x < 1250 && x >= 850){
-		for (let i = 0; i < TextCircle.length; i++) {
-			new CircleType(TextCircle[i])
-			  .radius(90); 
-		}
-
-	}else if(x < 850 && x >= 660){
-		for (let i = 0; i < TextCircle.length; i++) {
-			new CircleType(TextCircle[i])
-			  .radius(55); 
-		}
-
-	}else if(x < 660){
-		for (let i = 0; i < TextCircle.length; i++) {
-			new CircleType(TextCircle[i])
-			  .radius(40); 
-		}
-	}
-
-    // end contetn-mid
+});
 
 
-
-
-    //start google map
-	var initializeMap = function() {
-		var mapOptions = {
-			center: concordeLatLng,
-			zoom: 15,
-			streetViewControl: true,
-			mapMaker: true,
-			heading: 20,
-
-
-		};
-		var map = new google.maps.Map(document.getElementById("js-map"), mapOptions);
-
-		var marker = new google.maps.Marker({
-			position: concordeLatLng,
-			map: map,
-			icon: 'https://raw.githubusercontent.com/SunHarry198/images/master/icon-address.png'
-		});        
-	}
-
-	var concordeLatLng = new google.maps.LatLng(10.776147,106.682883);
-	google.maps.event.addDomListener(window, 'load', initializeMap);
-
-	// end google map
-
-
-
-	// start animation
-	var addressTeamplate = document.getElementsByClassName('address_teamplate');
-	var arrayAdressTemp = document.getElementsByClassName('array_address_temp');
-	window.addEventListener('scroll', function(){
-		for (let i = 0; i < arrayAdressTemp.length; i++) {
-
-			let totalOffset = document.body.scrollTop + arrayAdressTemp[i].getBoundingClientRect().top - 200;
-			let addressScroll = "add";
-			if (window.pageYOffset > totalOffset) {
-				if (addressScroll == "add") {
-					addressScroll = "noadd";
-					addressTeamplate[i].classList.add('add_animation');
-				}
-			}
-		}
-	})
-	// end animation
-
-},false);
